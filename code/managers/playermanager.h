@@ -12,6 +12,7 @@
 #include "util/stringatom.h"
 #include "renderutil/freecamerautil.h"
 #include "game/entity.h"
+#include "camera.h"
 
 namespace Demo
 {
@@ -42,6 +43,7 @@ private:
 	Game::Entity playerEntity;
 
 	RenderUtil::FreeCameraUtil freeCamUtil;
+	Demo::Camera camera;
 };
 
 } // namespace Demo

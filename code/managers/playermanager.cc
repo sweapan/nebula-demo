@@ -70,7 +70,7 @@ PlayerManager::OnActivate()
     camera.viewHandle = GraphicsFeature::GraphicsFeatureUnit::Instance()->GetDefaultViewHandle();
     Game::SetProperty<GraphicsFeature::Camera>(Singleton->playerEntity, Game::GetPropertyId("Camera"_atm), camera);
 
-    Singleton->freeCamUtil.Setup({0, 2, -3}, {0,0,-1});
+    Singleton->camera.Setup({0, 5, -3}, {0,1,0});
 
     GraphicsFeature::GraphicsFeatureUnit::Instance()->AddRenderUICallback([]()
     {
@@ -99,21 +99,22 @@ PlayerManager::OnBeginFrame()
     auto& io = ImGui::GetIO();
     if (!ImGui::GetIO().WantCaptureMouse)
     {
-        Singleton->freeCamUtil.SetForwardsKey(io.KeysDown[Input::Key::W]);
-        Singleton->freeCamUtil.SetBackwardsKey(io.KeysDown[Input::Key::S]);
-        Singleton->freeCamUtil.SetRightStrafeKey(io.KeysDown[Input::Key::D]);
-        Singleton->freeCamUtil.SetLeftStrafeKey(io.KeysDown[Input::Key::A]);
-        Singleton->freeCamUtil.SetUpKey(io.KeysDown[Input::Key::Q]);
-        Singleton->freeCamUtil.SetDownKey(io.KeysDown[Input::Key::E]);
+        /*Singleton->freeCamUtil.SetForwardsKey(io.KeysDown[Input::Key::Space]);
+        Singleton->freeCamUtil.SetBackwardsKey(io.KeysDown[Input::Key::LeftControl]);
+        Singleton->freeCamUtil.SetRightStrafeKey(io.KeysDown[Input::Key::Right]);
+        Singleton->freeCamUtil.SetLeftStrafeKey(io.KeysDown[Input::Key::Left]);
+        Singleton->freeCamUtil.SetUpKey(io.KeysDown[Input::Key::Up]);
+        Singleton->freeCamUtil.SetDownKey(io.KeysDown[Input::Key::Down]);
         Singleton->freeCamUtil.SetMouseMovement({ -io.MouseDelta.x, -io.MouseDelta.y });
         Singleton->freeCamUtil.SetAccelerateButton(io.KeyShift);
         Singleton->freeCamUtil.SetRotateButton(io.MouseDown[Input::MouseButton::RightButton]);
         Singleton->freeCamUtil.SetMovementSpeed(0.1f);
-        Singleton->freeCamUtil.Update();
+        Singleton->freeCamUtil.Update();*/
+        Singleton->camera.Update();
     }
 
     //Math::mat4 worldTransform = Game::GetProperty(Singleton->playerEntity, Game::GetPropertyId("WorldTransform"_atm));
-    Game::SetProperty<Math::mat4>(Singleton->playerEntity, Game::GetPropertyId("WorldTransform"_atm), Math::inverse(Singleton->freeCamUtil.GetTransform()));
+    Game::SetProperty<Math::mat4>(Singleton->playerEntity, Game::GetPropertyId("WorldTransform"_atm), Math::inverse(Singleton->camera.GetTransform()));
 }
 
 //------------------------------------------------------------------------------
