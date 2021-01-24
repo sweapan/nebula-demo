@@ -16,7 +16,6 @@ namespace Demo {
     {
         this->viewAngles.set(this->defaultEyeVec);
         this->position = this->defaultEyePos;
-        this->Update();
     }
 
     void
@@ -48,10 +47,6 @@ namespace Demo {
         this->transform = xMat * yMat;
 
         float currentMoveSpeed = moveSpeed;
-        /*if (this->accelerateButton)
-        {
-            currentMoveSpeed *= 20;
-        }*/
         Math::vec4 translation = Math::vec4(0, 0, 0, 0);
         if (io.KeysDown[Input::Key::Up])
         {
@@ -80,6 +75,10 @@ namespace Demo {
             position.y -= currentMoveSpeed;
         }
 
+        if (io.KeysDown[Input::Key::R]) 
+        {
+            this->Reset();
+        }
         translation = this->transform * translation;
         this->position += xyz(translation);
 
