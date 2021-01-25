@@ -7,6 +7,7 @@
 #include "math/scalar.h"
 #include "imgui.h"
 #include "input/inputserver.h"
+#include "properties/input.h"
 
 namespace Demo
 {
@@ -16,7 +17,7 @@ namespace Demo
 	public:
 		void Setup(const Math::point& defaultEyePos, const Math::vector& defaultEyeVec);
 		void Reset();
-		void Update();
+		void Update(PlayerInput);
 		const Math::mat4& GetTransform() const;
 	private:
 		Math::point defaultEyePos;

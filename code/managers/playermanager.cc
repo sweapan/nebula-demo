@@ -14,6 +14,7 @@
 #include "input/mouse.h"
 #include "renderutil/mouserayutil.h"
 #include "game/api.h"
+#include "properties/input.h"
 
 namespace Demo
 {
@@ -97,6 +98,7 @@ void
 PlayerManager::OnBeginFrame()
 {
     auto& io = ImGui::GetIO();
+    PlayerInput input = Game::GetProperty<PlayerInput>(Singleton->playerEntity, Game::GetPropertyId("PlayerInput"));
     if (!ImGui::GetIO().WantCaptureMouse)
     {
         /*Singleton->freeCamUtil.SetForwardsKey(io.KeysDown[Input::Key::Space]);
@@ -110,7 +112,7 @@ PlayerManager::OnBeginFrame()
         Singleton->freeCamUtil.SetRotateButton(io.MouseDown[Input::MouseButton::RightButton]);
         Singleton->freeCamUtil.SetMovementSpeed(0.1f);
         Singleton->freeCamUtil.Update();*/
-        Singleton->camera.Update();
+        Singleton->camera.Update(input);
     }
 
     //Math::mat4 worldTransform = Game::GetProperty(Singleton->playerEntity, Game::GetPropertyId("WorldTransform"_atm));

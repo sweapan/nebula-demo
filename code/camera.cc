@@ -8,7 +8,6 @@ namespace Demo {
         this->defaultEyeVec = defaultEyeVec;
         this->position = this->defaultEyePos;
         this->viewAngles.set(this->defaultEyeVec);
-        this->Update();
     }
 
     void
@@ -19,26 +18,26 @@ namespace Demo {
     }
 
     void
-    Camera::Update()
+    Camera::Update(PlayerInput input)
     {
         auto& io = ImGui::GetIO();
         //Rotate counterclockwise
-        if (io.KeysDown[Input::Key::A])
+        if (input.countercwY)
         {
             this->viewAngles.rho += rotationSpeed;
         }
         //Rotate clockwise
-        if (io.KeysDown[Input::Key::D])
+        if (input.clockwiseY)
         {
             this->viewAngles.rho -= rotationSpeed;
         }
         //Rotate up
-        if (io.KeysDown[Input::Key::W])
+        if (input.countercwX)
         {
             this->viewAngles.theta += rotationSpeed;
         }
         //Rotate down
-        if (io.KeysDown[Input::Key::S])
+        if (input.clockwiseX)
         {
             this->viewAngles.theta -= rotationSpeed;
         }
@@ -48,34 +47,34 @@ namespace Demo {
 
         float currentMoveSpeed = moveSpeed;
         Math::vec4 translation = Math::vec4(0, 0, 0, 0);
-        if (io.KeysDown[Input::Key::Up])
+        if (input.forward)
         {
             position.x -= Math::sin(this->viewAngles.rho) * currentMoveSpeed;
             position.z -= Math::cos(this->viewAngles.rho) * currentMoveSpeed;
         }
-        if (io.KeysDown[Input::Key::Down])
+        if (input.backward)
         {
             position.x += Math::sin(this->viewAngles.rho) * currentMoveSpeed;
             position.z += Math::cos(this->viewAngles.rho) * currentMoveSpeed;
         }
-        if (io.KeysDown[Input::Key::Right])
+        if (input.right)
         {
             translation.x += currentMoveSpeed;
         }
-        if (io.KeysDown[Input::Key::Left])
+        if (input.left)
         {
             translation.x -= currentMoveSpeed;
         }
-        if (io.KeysDown[Input::Key::RightShift])
+        if (input.up)
         {
             position.y += currentMoveSpeed;
         }
-        if (io.KeysDown[Input::Key::RightControl])
+        if (input.down)
         {
             position.y -= currentMoveSpeed;
         }
 
-        if (io.KeysDown[Input::Key::R]) 
+        if (input.reset) 
         {
             this->Reset();
         }

@@ -2,9 +2,20 @@
     "blueprint": "Player",
     "properties": {
         "WorldTransform": [1,0,0,0,0,1,0,0,0,0,1,0,0,5,0,1],
-        "PlayerInput": {
-            "hasFocus": true
-        },
+      "PlayerInput": {
+        "hasFocus": true,
+        "forward": false,
+        "backward": false,
+        "left": false,
+        "right": false,
+        "clockwiseY": false,
+        "countercwY": false,
+        "clockwiseX": false,
+        "countercwX": false,
+        "up": false,
+        "down": false,
+        "reset": false
+      },
         "Camera": {
             "fieldOfView": 90.0,
             "projectionMode": "PERSPECTIVE",

@@ -4,7 +4,8 @@
             "desc": "First person player",
             "properties": [
                 "WorldTransform",
-                "Camera"
+                "Camera",
+                "PlayerInput"
             ]
         },
         "StaticEnvironment": {
