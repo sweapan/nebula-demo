@@ -71,6 +71,7 @@ PlayerManager::OnActivate()
     camera.viewHandle = GraphicsFeature::GraphicsFeatureUnit::Instance()->GetDefaultViewHandle();
     Game::SetProperty<GraphicsFeature::Camera>(Singleton->playerEntity, Game::GetPropertyId("Camera"_atm), camera);
 
+    //This is a different "camera", this should probably be called "player" or some such
     Singleton->camera.Setup({0, 5, -3}, {0,1,0});
 
     GraphicsFeature::GraphicsFeatureUnit::Instance()->AddRenderUICallback([]()
@@ -101,21 +102,9 @@ PlayerManager::OnBeginFrame()
     PlayerInput input = Game::GetProperty<PlayerInput>(Singleton->playerEntity, Game::GetPropertyId("PlayerInput"));
     if (!ImGui::GetIO().WantCaptureMouse)
     {
-        /*Singleton->freeCamUtil.SetForwardsKey(io.KeysDown[Input::Key::Space]);
-        Singleton->freeCamUtil.SetBackwardsKey(io.KeysDown[Input::Key::LeftControl]);
-        Singleton->freeCamUtil.SetRightStrafeKey(io.KeysDown[Input::Key::Right]);
-        Singleton->freeCamUtil.SetLeftStrafeKey(io.KeysDown[Input::Key::Left]);
-        Singleton->freeCamUtil.SetUpKey(io.KeysDown[Input::Key::Up]);
-        Singleton->freeCamUtil.SetDownKey(io.KeysDown[Input::Key::Down]);
-        Singleton->freeCamUtil.SetMouseMovement({ -io.MouseDelta.x, -io.MouseDelta.y });
-        Singleton->freeCamUtil.SetAccelerateButton(io.KeyShift);
-        Singleton->freeCamUtil.SetRotateButton(io.MouseDown[Input::MouseButton::RightButton]);
-        Singleton->freeCamUtil.SetMovementSpeed(0.1f);
-        Singleton->freeCamUtil.Update();*/
         Singleton->camera.Update(input);
     }
 
-    //Math::mat4 worldTransform = Game::GetProperty(Singleton->playerEntity, Game::GetPropertyId("WorldTransform"_atm));
     Game::SetProperty<Math::mat4>(Singleton->playerEntity, Game::GetPropertyId("WorldTransform"_atm), Math::inverse(Singleton->camera.GetTransform()));
 }
 
