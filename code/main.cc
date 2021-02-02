@@ -16,6 +16,7 @@
 #include "scripting/python/pythonserver.h"
 #include "dynui/console/imguiconsole.h"
 #include "dynui/console/imguiconsolehandler.h"
+#include "pythonbindings.h"
 
 #ifdef NEBULA_EDITOR_ENABLED
 #include "editorfeature/editorfeatureunit.h"
