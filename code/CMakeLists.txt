@@ -1,4 +1,5 @@
 nebula_begin_app(nebula-demo windowed)
+fipsutil_copy(bootstrapper.yml)
 
 fips_dir(.)
     add_blueprint(
@@ -36,6 +37,7 @@ fips_dir(.)
             input.nidl
             movement.nidl
         )
+	
 
 fips_deps(foundation application render resource dynui scripting editor)
 nebula_end_app()

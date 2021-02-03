@@ -17,6 +17,7 @@ namespace Demo
 	public:
 		void Setup(const Math::point& defaultEyePos, const Math::vector& defaultEyeVec);
 		void Reset();
+		void MoveTo(Math::point newPos);
 		void Update(PlayerInput);
 		const Math::mat4& GetTransform() const;
 	private:
@@ -25,6 +26,8 @@ namespace Demo
 
 		Math::polar viewAngles;
 		Math::point position;
+		Math::point newPosition;
+		bool moveComplete = true;
 		Math::mat4 transform;
 
 		float rotationSpeed = 0.1f;

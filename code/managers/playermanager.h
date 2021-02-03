@@ -27,6 +27,11 @@ public:
 	/// Destroy the singleton
 	static void Destroy();
 
+	/// Get playerEntity
+	inline Game::Entity GetPlayerEntity() { return playerEntity; };
+
+	/// Get Camera object
+	inline Demo::Camera* GetCamera() { return &camera; };
 private:
 	/// constructor
 	PlayerManager();

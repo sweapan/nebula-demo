@@ -100,10 +100,8 @@ PlayerManager::OnBeginFrame()
 {
     auto& io = ImGui::GetIO();
     PlayerInput input = Game::GetProperty<PlayerInput>(Singleton->playerEntity, Game::GetPropertyId("PlayerInput"));
-    if (!ImGui::GetIO().WantCaptureMouse)
-    {
-        Singleton->camera.Update(input);
-    }
+    
+    Singleton->camera.Update(input);
 
     Game::SetProperty<Math::mat4>(Singleton->playerEntity, Game::GetPropertyId("WorldTransform"_atm), Math::inverse(Singleton->camera.GetTransform()));
 }
